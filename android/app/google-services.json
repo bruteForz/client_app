@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1056956571037",
+    "project_id": "smart-frog-id",
+    "storage_bucket": "smart-frog-id.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056956571037:android:1ef5933ddf7e1584b1a374",
+        "android_client_info": {
+          "package_name": "com.bruteforz.client_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056956571037-gd82339ra20ssd5jtihkvjqht979t9tm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6F5feBpTKGVg9fzFHo4NR5iracf_WZdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056956571037-gd82339ra20ssd5jtihkvjqht979t9tm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
