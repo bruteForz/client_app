@@ -149,9 +149,10 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                       child: const Text(
                         'Create New Account',
                         style: TextStyle(
-                            color: mainFontColor,
-                            fontSize: textBtnFontSize,
-                            fontWeight: FontWeight.bold),
+                          color: mainFontColor,
+                          fontSize: textBtnFontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
