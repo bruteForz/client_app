@@ -1,5 +1,5 @@
 import 'package:client_app/Constants/fontSizes.dart';
-import 'package:client_app/views/signUpScreen.dart';
+import 'package:client_app/views/loginScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../Constants/elementColors.dart';
@@ -47,7 +47,12 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
         foregroundColor: Colors.black,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+            );
           },
           icon: const Icon(
             Icons.arrow_circle_left,
@@ -148,9 +153,11 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                       TextButton(
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpScreen()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreenWidget(),
+                            ),
+                          );
                         },
                         child: const Text(
                           'Login',

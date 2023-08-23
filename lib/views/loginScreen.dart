@@ -1,4 +1,5 @@
 import 'package:client_app/Constants/fontSizes.dart';
+import 'package:client_app/views/helloHomeScreen.dart';
 import 'package:client_app/views/signUpScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -98,25 +99,27 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    print('${unameController.text} and ${pwdController.text}');
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HelloHomeScreen()));
                   },
-                  child: Container(
-                    width: double.infinity,
-                    height: deviceSize.height * 0.08,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25.0),
-                      color: btnColor,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Log in',
-                        style: TextStyle(
-                          color: backgroundColor,
-                          fontSize: btnTextFontSize,
-                        ),
+                  child: SizedBox(
+                    child: Container(
+                      width: double.infinity,
+                      height: deviceSize.height * 0.08,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        color: btnColor,
                       ),
+                      child: const Center(
+                          child: Text(
+                        "Log in",
+                        style: TextStyle(
+                            color: backgroundColor, fontSize: btnTextFontSize),
+                      )),
                     ),
                   ),
                 ),
