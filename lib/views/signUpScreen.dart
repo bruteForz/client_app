@@ -198,7 +198,7 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                           });
 
                           dynamic result = await _auth.registerUser(user);
-                          if (result == null) {
+                          if (result == 'failed') {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(userCreationFailed);
                           } else {

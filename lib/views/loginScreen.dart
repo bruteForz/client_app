@@ -1,4 +1,5 @@
 import 'package:client_app/Constants/fontSizes.dart';
+import 'package:client_app/Models/firebaseUser.model.dart';
 import 'package:client_app/views/signUpScreen.dart';
 import 'package:flutter/material.dart';
 

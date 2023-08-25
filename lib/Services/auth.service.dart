@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:client_app/Models/user.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -11,15 +12,19 @@ class AuthService {
   }
 
   // Register User
-  Future registerUser(ClientUser user) async {
-    try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(
-          email: user.email, password: user.password);
-      User? firebaseUser = result.user;
-      return _userFromFirebaseUser(firebaseUser);
-    } catch (e) {
-      return null;
-    }
+  Future registerUser(ClientUser inputUser) async {
+      await _auth
+      .createUserWithEmailAndPassword(
+        email: inputUser.email,
+        password: inputUser.password,
+    ).then((user) async {
+      await _auth.currentUser?.updateDisplayName(inputUser.name);
+      await _auth.currentUser?.reload();
+      User updatedUser = await _auth.currentUser!;
+      return _userFromFirebaseUser(updatedUser);
+    }).catchError((error) {
+      return 'failed';
+    });
   }
 
   // Sign in User
@@ -27,9 +32,32 @@ class AuthService {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? firebaseUser = result.user;
-      print(firebaseUser);
-      return _userFromFirebaseUser(firebaseUser);
+      if (firebaseUser != null) {
+        // Save user data to shared preferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('userId', firebaseUser.uid);
+        prefs.setString('userName', firebaseUser.displayName ?? '');
+        prefs.setString('userEmail', firebaseUser.email ?? '');
+
+        return _userFromFirebaseUser(firebaseUser);
+      } else {
+        return null;
+      }
     } catch(e) {
+      print("Error: $e");
+      return null;
+    }
+  }
+
+  // Sign out user
+
+  Future signOut() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.clear();
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
       return null;
     }
   }
