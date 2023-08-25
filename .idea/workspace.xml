@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba1324cf-2717-400d-89c7-9b9179c48a80" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/android/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Constants/snackBarMessages.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/user.model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Services/auth.service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/helloHomeScreen.dart" afterDir="false" />
+    <list default="true" id="ba1324cf-2717-400d-89c7-9b9179c48a80" name="Changes" comment="added new features">
+      <change afterPath="$PROJECT_DIR$/assets/images/browse-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/rec-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Models/firebaseUser.model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/client_app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Constants/fontSizes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Constants/fontSizes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/user.model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/user.model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Services/auth.service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Services/auth.service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/helloHomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/helloHomeScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/homeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/homeScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/loginScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/loginScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/signUpScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/signUpScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
@@ -50,16 +57,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "io.flutter.reload.alreadyRun": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\samee\Dev\bruteForz\client_app\assets\images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,5 +88,20 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
     </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added new features" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new features" />
   </component>
 </project>
