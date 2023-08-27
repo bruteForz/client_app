@@ -1,27 +1,32 @@
 import 'package:client_app/Constants/fontSizes.dart';
+import 'package:client_app/views/displayResult.dart';
 import 'package:client_app/views/loginScreen.dart';
-import 'package:client_app/views/readyToRecordScreen.dart';
+import 'package:client_app/views/networkError.dart';
+import 'package:client_app/views/oopsError.dart';
+import 'package:client_app/views/recordScreen.dart';
 import 'package:client_app/views/signUpScreen.dart';
+import 'package:client_app/views/helloHomeScreen.dart';
 import 'package:flutter/material.dart';
 import '../Constants/elementColors.dart';
 
-class HelloHomeScreen extends StatelessWidget {
-  const HelloHomeScreen({super.key});
+class ReadyToRecordScreen extends StatelessWidget {
+  const ReadyToRecordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return HelloHomeScreenWidget();
+    return ReadyToRecordScreenWidget();
   }
 }
 
-class HelloHomeScreenWidget extends StatefulWidget {
-  const HelloHomeScreenWidget({super.key});
+class ReadyToRecordScreenWidget extends StatefulWidget {
+  const ReadyToRecordScreenWidget({super.key});
 
   @override
-  State<HelloHomeScreenWidget> createState() => _HelloHomeScreenWidgetState();
+  State<ReadyToRecordScreenWidget> createState() =>
+      _ReadyToRecordScreenWidgetState();
 }
 
-class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
+class _ReadyToRecordScreenWidgetState extends State<ReadyToRecordScreenWidget> {
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
@@ -56,47 +61,11 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
-                    'Hello! John Doe',
+                    'Get Ready To Record',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: titleFontSize,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: deviceSize.height * 0.08),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ReadyToRecordScreen()));
-                    },
-                    child: Image.asset(
-                      'assets/images/rec-icon.png',
-                      scale: 4.1,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ReadyToRecordScreen()));
-                    },
-                    child: const Text(
-                      'Record a Call',
-                      style: TextStyle(
-                        color: mainFontColor,
-                        fontSize: textBtnFontSize,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const Text(
-                    'Find a location with no background noise, such as loud animals, horns or traffic',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: hintFontColor,
-                      fontSize: hintTextFontSize,
                     ),
                   ),
                   SizedBox(height: deviceSize.height * 0.05),
@@ -105,31 +74,53 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignUpScreen()));
+                              builder: (context) => RecordScreen()));
                     },
+                    // onTap: () {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) => NetworkErrorScreen()));
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) => OopsErrorScreen()));
+                    // },
+                    // onTap: () {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) => DisplayResultScreen()));
+                    // },
                     child: Image.asset(
-                      'assets/images/browse-icon.png',
-                      scale: 2.5,
+                      'assets/images/recordcallimage.png',
+                      scale: 1.8,
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
+                  SizedBox(height: deviceSize.height * 0.05),
+                  GestureDetector(
+                    onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignUpScreen()));
+                              builder: (context) => RecordScreen()));
                     },
-                    child: const Text(
-                      'Browse Species',
-                      style: TextStyle(
-                        color: mainFontColor,
-                        fontSize: textBtnFontSize,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Image.asset(
+                      'assets/images/readytorecordicon.png',
+                      scale: 8,
                     ),
                   ),
                   const Text(
-                    'Discover frog species in Sri Lanka based on your preference',
+                    'Look for a peaceful spot/ location',
+                    style: TextStyle(
+                      color: mainFontColor,
+                      fontSize: textBtnFontSize,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: deviceSize.height * 0.01),
+                  const Text(
+                    'Find a location with no background noise, such as loud animals, horns or traffic',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: hintFontColor,
