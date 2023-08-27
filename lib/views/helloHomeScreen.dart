@@ -9,7 +9,6 @@ import '../Constants/fontSizes.dart';
 import '../Services/auth.service.dart';
 import 'loginScreen.dart';
 
-
 class HelloHomeScreen extends StatelessWidget {
   const HelloHomeScreen({super.key});
 
@@ -27,7 +26,6 @@ class HelloHomeScreenWidget extends StatefulWidget {
 }
 
 class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
-
   final AuthService _auth = AuthService();
 
   @override
@@ -48,6 +46,7 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       return prefs.getString('userEmail');
     }
+
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
@@ -84,7 +83,7 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
                   FutureBuilder<String?>(
                     future: getUserName(),
                     builder: (context, snapshot) {
-                      if(snapshot.connectionState == ConnectionState.waiting) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
                         return CircularProgressIndicator();
                       } else if (snapshot.hasData) {
                         return Text(
@@ -105,7 +104,7 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignUpScreen()));
+                              builder: (context) => ReadyToRecordScreen()));
                     },
                     child: Image.asset(
                       'assets/images/rec-icon.png',
@@ -117,7 +116,7 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignUpScreen()));
+                              builder: (context) => ReadyToRecordScreen()));
                     },
                     child: const Text(
                       'Record a Call',

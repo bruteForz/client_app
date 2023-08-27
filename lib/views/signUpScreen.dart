@@ -1,4 +1,5 @@
 import 'package:client_app/Constants/fontSizes.dart';
+import 'package:client_app/views/loginScreen.dart';
 import 'package:client_app/Models/user.model.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
@@ -64,7 +65,12 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
         foregroundColor: Colors.black,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+            );
           },
           icon: const Icon(
             Icons.arrow_circle_left,
