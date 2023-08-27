@@ -1,9 +1,13 @@
-import 'package:client_app/Constants/fontSizes.dart';
-import 'package:client_app/views/loginScreen.dart';
-import 'package:client_app/views/readyToRecordScreen.dart';
+import 'package:client_app/Models/firebaseUser.model.dart';
+import 'package:client_app/views/homeScreen.dart';
 import 'package:client_app/views/signUpScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../Constants/elementColors.dart';
+import '../Constants/fontSizes.dart';
+import '../Services/auth.service.dart';
+import 'loginScreen.dart';
 
 class HelloHomeScreen extends StatelessWidget {
   const HelloHomeScreen({super.key});
@@ -22,10 +26,29 @@ class HelloHomeScreenWidget extends StatefulWidget {
 }
 
 class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
-    return SafeArea(
+
+    Future<String?> getUserId() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString('userId');
+    }
+
+    Future<String?> getUserName() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString('userName');
+    }
+
+    Future<String?> getUserEmail() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString('userEmail');
+    }
+
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -33,16 +56,18 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
           foregroundColor: Colors.black,
           leading: IconButton(
             onPressed: () {
+              _auth.signOut();
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
+                  builder: (context) => HomeScreen(),
                 ),
               );
             },
             icon: const Icon(
-              Icons.arrow_circle_left,
+              Icons.logout,
               size: titleFontSize,
+              semanticLabel: 'Logout',
             ),
           ),
         ),
@@ -55,12 +80,23 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Hello! John Doe',
-                    style: TextStyle(
-                      fontSize: titleFontSize,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  FutureBuilder<String?>(
+                    future: getUserName(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasData) {
+                        return Text(
+                          'Hello! ${snapshot.data}',
+                          style: TextStyle(
+                            fontSize: titleFontSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      } else {
+                        return Text('User data not found.');
+                      }
+                    },
                   ),
                   SizedBox(height: deviceSize.height * 0.08),
                   GestureDetector(
