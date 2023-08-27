@@ -1,11 +1,12 @@
 import 'package:client_app/Constants/fontSizes.dart';
-import 'package:client_app/Models/firebaseUser.model.dart';
 import 'package:client_app/views/signUpScreen.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../Constants/elementColors.dart';
 import '../Constants/snackBarMessages.dart';
 import '../Services/auth.service.dart';
+
 import 'helloHomeScreen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -25,7 +26,7 @@ class LoginScreenWidget extends StatefulWidget {
 }
 
 class _LoginScreenWidgetState extends State<LoginScreenWidget> {
-  static final _formKey = GlobalKey<FormState>();
+  static final _loginFormKey = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
 
   String email = '';
@@ -70,7 +71,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Form(
-              key: _formKey,
+              key: _loginFormKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
@@ -85,16 +86,23 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                   ),
                   SizedBox(height: deviceSize.height * 0.1),
                   TextFormField(
-                    controller: unameController,
+                    onChanged: (val) => setState(() {
+                      email = val;
+                    }),
+                    validator: (val) => EmailValidator.validate(val!)
+                        ? null
+                        : 'Enter a valid email',
                     decoration: const InputDecoration(
-                      labelText: 'Username',
+                      labelText: 'Email',
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.black),
                       ),
                     ),
                   ),
                   TextFormField(
-                    controller: pwdController,
+                    onChanged: (val) => setState(() {
+                      password = val;
+                    }),
                     obscureText: true,
                     maxLength: 20,
                     decoration: const InputDecoration(
@@ -106,14 +114,9 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      if (_formKey.currentState!.validate()) {
-                        setState(() {
-                          email = unameController.text;
-                          password = pwdController.text;
-                        });
-                      }
+                      _loginFormKey.currentState!.validate();
                       dynamic result = await _auth.signInUser(email, password);
-                      if(result == null) {
+                      if (result == null) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(signInFailed);
                       } else {
