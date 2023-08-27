@@ -47,3 +47,11 @@ const signInSuccess = SnackBar(
   behavior: SnackBarBehavior.floating,
   margin: EdgeInsets.all(5),
 );
+
+const fileSelectionFailed = SnackBar(
+  content: Text('File Selection Failed!'),
+  backgroundColor: Colors.red,
+  elevation: 10,
+  behavior: SnackBarBehavior.floating,
+  margin: EdgeInsets.all(5),
+);

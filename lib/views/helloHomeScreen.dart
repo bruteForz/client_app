@@ -48,7 +48,8 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       return prefs.getString('userEmail');
     }
-    return SafeArea(
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -65,8 +66,9 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
               );
             },
             icon: const Icon(
-              Icons.arrow_circle_left,
+              Icons.logout,
               size: titleFontSize,
+              semanticLabel: 'Logout',
             ),
           ),
         ),
