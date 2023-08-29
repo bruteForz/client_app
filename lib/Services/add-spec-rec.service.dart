@@ -3,10 +3,7 @@ import 'dart:math';
 import 'package:client_app/Models/spec-rec.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-
 class AddSpeciesRecord {
-
   String getCustomUniqueId() {
     const String pushChars =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
@@ -41,20 +38,21 @@ class AddSpeciesRecord {
     return uniqueId;
   }
 
-  Future<void> addSpeciesRecord(String sciName, String comName, String consStat, String image) async {
+  Future<void> addSpeciesRecord(
+      String sciName, String comName, String consStat, String image) async {
     final CollectionReference record =
-    FirebaseFirestore.instance.collection('species_record');
+        FirebaseFirestore.instance.collection('species_record');
 
     String specId = getCustomUniqueId();
 
     await record.add({
+      'species_id': specId,
       'scientific_name': sciName,
       'common_name': comName,
       'conservation_status': consStat,
-      'species_id': specId,
       'image': image,
     }).then((value) => {
-      print(value),
-    });
+          print(value),
+        });
   }
 }

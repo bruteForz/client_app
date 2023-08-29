@@ -1,5 +1,6 @@
 import 'package:client_app/Models/firebaseUser.model.dart';
 import 'package:client_app/views/homeScreen.dart';
+import 'package:client_app/views/readyToRecordScreen.dart';
 import 'package:client_app/views/signUpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bruteforz.client_app">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:label="client_app"
         android:name="${applicationName}"
@@ -30,5 +31,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data android:name="com.google.android.geo.AIzaSyD4sv0W2lYwKywjY4S9Ql1_aHHj4M_2FI8"
+               android:value="AIzaSyD4sv0W2lYwKywjY4S9Ql1_aHHj4M_2FI8"/>
     </application>
 </manifest>
