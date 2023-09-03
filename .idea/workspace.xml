@@ -10,21 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba1324cf-2717-400d-89c7-9b9179c48a80" name="Changes" comment="added new features">
-      <change afterPath="$PROJECT_DIR$/lib/Models/spec-rec.model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Services/add-spec-rec.service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Services/add-user.service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Services/firebase-storage.service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/addSpeciesRecord.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/loading-animation-2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/loading-animation.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Constants/snackBarMessages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Constants/snackBarMessages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Services/auth.service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Services/auth.service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/helloHomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/helloHomeScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/loginScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/loginScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/signUpScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/signUpScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/homeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/homeScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,6 +63,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\samee\Dev\bruteForz\client_app\assets\animations" />
       <recent name="C:\Users\samee\Dev\bruteForz\client_app\assets\images" />
     </key>
   </component>
