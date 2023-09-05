@@ -1,5 +1,6 @@
 import 'package:client_app/views/helloHomeScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import 'loginScreen.dart';
 
@@ -21,6 +22,18 @@ class HomeScreenWidget extends StatefulWidget {
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 5)).then(
+      (value) => Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -33,14 +46,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               scale: 2.0,
             ),
           ),
-
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()));
-            },
-            backgroundColor: const Color(0xFF4CAF50),
-            child: const Icon(Icons.arrow_forward_ios),
+          Container(
+            child: LottieBuilder.asset(
+              'assets/animations/loading-animation-2.json',
+              height: 75.0,
+              width: 75.0,
+            ),
           ),
         ],
       ),
