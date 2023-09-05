@@ -7,29 +7,26 @@ class ImageStorage {
 
   String imageUrl = '';
 
-  Future<String> uploadFile(
-      String fileName,
-      String filePath
-      ) async {
+  Future<String> uploadFile(String fileName, String filePath) async {
     File file = File(filePath);
 
     try {
-      Reference ref =  await storage.ref('images/$fileName');
+      Reference ref = await storage.ref('images/$fileName');
       UploadTask uploadTask = ref.putFile(file);
 
-      uploadTask.whenComplete(() async{
-        try{
+      uploadTask.whenComplete(() async {
+        try {
           var downloadUrl = await (await uploadTask).ref.getDownloadURL();
           imageUrl = downloadUrl.toString();
           return imageUrl;
-        }catch(onError){
+        } catch (onError) {
           print("Error");
         }
-        });
+      });
       return imageUrl;
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
       return e.toString();
-      }
+    }
   }
 }
