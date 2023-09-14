@@ -54,9 +54,6 @@ class AuthService {
           'name': firebaseUser.displayName,
           'email': firebaseUser.email
         });
-        // AddUserService addUser = AddUserService();
-        // await addUser.addUser(firebaseUser.uid, firebaseUser.displayName ?? '',
-        //     firebaseUser.email ?? '');
 
         return _userFromFirebaseUser(firebaseUser);
       } else {

@@ -1,6 +1,7 @@
 import 'package:client_app/Constants/fontSizes.dart';
 import 'package:client_app/views/loginScreen.dart';
 import 'package:client_app/Models/user.model.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -8,6 +9,7 @@ import '../Constants/elementColors.dart';
 import '../Services/auth.service.dart';
 import '../Constants/snackBarMessages.dart';
 import 'loginScreen.dart';
+import 'networkError.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -34,6 +36,26 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
     userName: '',
     password: '',
   );
+
+  late ConnectivityResult _connectionStatus;
+
+  @override
+  void initState() {
+    super.initState();
+    // Subscribe to connectivity changes
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      setState(() {
+        _connectionStatus = result;
+      });
+    });
+
+    // Check the initial connectivity state
+    Connectivity().checkConnectivity().then((ConnectivityResult result) {
+      setState(() {
+        _connectionStatus = result;
+      });
+    });
+  }
 
   String name = '';
   String email = '';
@@ -214,17 +236,24 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                           user.password = password;
                         });
 
-                        dynamic result = await _auth.registerUser(user);
-                        if (result == 'failed') {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(userCreationFailed);
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(userCreationSuccess);
+                        if (_connectionStatus == ConnectivityResult.none) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
+                                  builder: (context) => NetworkErrorScreen()));
+                        } else {
+                          dynamic result = await _auth.registerUser(user);
+                          if (result == 'failed') {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(userCreationFailed);
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(userCreationSuccess);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginScreen()));
+                          }
                         }
                       } else {
                         ScaffoldMessenger.of(context)

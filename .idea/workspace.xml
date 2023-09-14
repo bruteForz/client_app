@@ -10,13 +10,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba1324cf-2717-400d-89c7-9b9179c48a80" name="Changes" comment="added new features">
-      <change afterPath="$PROJECT_DIR$/lib/views/mapsScreen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/IMG1.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/IMG2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/IMG3.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Services/check-connection.service.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Widget/corusel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/frogDetailScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Constants/elementColors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Constants/elementColors.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Services/auth.service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Services/auth.service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Services/firebase-storage.service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Services/firebase-storage.service.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/browseSpecies.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/browseSpecies.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/loginScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/loginScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/networkError.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/networkError.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/recordScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/recordScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/signUpScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/signUpScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +63,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,

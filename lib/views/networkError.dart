@@ -29,25 +29,6 @@ class _ReadyToRecordScreenWidgetState extends State<NetworkErrorScreenWidget> {
     var deviceSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          foregroundColor: Colors.black,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.arrow_circle_left,
-              size: titleFontSize,
-            ),
-          ),
-        ),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -93,10 +74,10 @@ class _ReadyToRecordScreenWidgetState extends State<NetworkErrorScreenWidget> {
                   SizedBox(height: deviceSize.height * 0.07),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HelloHomeScreen()));
+                              builder: (context) => LoginScreen()));
                     },
                     child: SizedBox(
                       child: Container(
