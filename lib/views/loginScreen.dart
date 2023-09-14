@@ -1,5 +1,6 @@
 import 'package:client_app/Constants/fontSizes.dart';
 import 'package:client_app/views/signUpScreen.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,9 @@ import '../Constants/elementColors.dart';
 import '../Constants/snackBarMessages.dart';
 import '../Services/auth.service.dart';
 
+import '../Services/check-connection.service.dart';
 import 'helloHomeScreen.dart';
+import 'networkError.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -26,8 +29,27 @@ class LoginScreenWidget extends StatefulWidget {
 }
 
 class _LoginScreenWidgetState extends State<LoginScreenWidget> {
-  static final _loginFormKey = GlobalKey<FormState>();
+  final _loginFormKey = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
+  late ConnectivityResult _connectionStatus;
+
+  @override
+  void initState() {
+    super.initState();
+    // Subscribe to connectivity changes
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      setState(() {
+        _connectionStatus = result;
+      });
+    });
+
+    // Check the initial connectivity state
+    Connectivity().checkConnectivity().then((ConnectivityResult result) {
+      setState(() {
+        _connectionStatus = result;
+      });
+    });
+  }
 
   String email = '';
   String password = '';
@@ -51,21 +73,15 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
       }
     }
 
+    pwdValidator(String? val) {
+      if (val!.length > 8)
+        return null;
+      else
+          if(val!.length == 0) return 'Password is Empty!';
+        return 'Password is too short';
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        foregroundColor: Colors.black,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_circle_left,
-            size: titleFontSize,
-          ),
-        ),
-      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -103,6 +119,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     onChanged: (val) => setState(() {
                       password = val;
                     }),
+                    validator: (val) => pwdValidator(val),
                     obscureText: true,
                     maxLength: 20,
                     decoration: const InputDecoration(
@@ -114,18 +131,28 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      _loginFormKey.currentState!.validate();
-                      dynamic result = await _auth.signInUser(email, password);
-                      if (result == null) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(signInFailed);
-                      } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(signInSuccess);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HelloHomeScreen()));
+                      if (_loginFormKey.currentState!.validate()) {
+                        if (_connectionStatus == ConnectivityResult.none) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NetworkErrorScreen()));
+                        } else {
+                          _loginFormKey.currentState!.validate();
+                          dynamic result =
+                              await _auth.signInUser(email, password);
+                          if (result == null) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(signInFailed);
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(signInSuccess);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HelloHomeScreen()));
+                          }
+                        }
                       }
                     },
                     child: Container(

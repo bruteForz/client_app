@@ -1,5 +1,9 @@
 import 'package:client_app/views/addSpeciesRecord.dart';
 import 'package:client_app/views/homeScreen.dart';
+import 'package:client_app/views/mapsScreen.dart';
+import 'package:client_app/views/networkError.dart';
+import 'package:client_app/views/oopsError.dart';
+import 'package:client_app/views/recordScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: const Color(0xFF4CAF50),
       ),
-      home: const HomeScreen(),
+      home: RecordScreen(),
     );
   }
 }
