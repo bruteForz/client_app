@@ -3,13 +3,10 @@ import 'dart:math';
 import 'package:client_app/Models/spec-rec.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-
-class AddSpeciesRecord {
-
+class SpeciesRecordService {
   String getCustomUniqueId() {
     const String pushChars =
-        '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     int lastPushTime = 0;
     List lastRandChars = [];
     int now = DateTime.now().millisecondsSinceEpoch;
@@ -41,20 +38,64 @@ class AddSpeciesRecord {
     return uniqueId;
   }
 
-  Future<void> addSpeciesRecord(String sciName, String comName, String consStat, String image) async {
+  // Future<String?> addSpeciesRecord(String sciName, String comName, String consStat,
+  //     String image, String description) async {
+  //   final CollectionReference record =
+  //       FirebaseFirestore.instance.collection('species_record');
+
+  //   String specId = getCustomUniqueId();
+
+  //   await record.add({
+  //     'scientific_name': sciName,
+  //     'common_name': comName,
+  //     'conservation_status': consStat,
+  //     'species_id': specId,
+  //     'image': image,
+  //     'description': description,
+  //   }).then((value) => {
+
+  //       });
+  //   return null;
+  // }
+
+  Future<bool?> addSpeciesRecord(String sciName, String comName,
+      String consStat, String image, String description) async {
     final CollectionReference record =
-    FirebaseFirestore.instance.collection('species_record');
+        FirebaseFirestore.instance.collection('species_record');
 
     String specId = getCustomUniqueId();
 
-    await record.add({
-      'scientific_name': sciName,
-      'common_name': comName,
-      'conservation_status': consStat,
-      'species_id': specId,
-      'image': image,
-    }).then((value) => {
-      print(value),
-    });
+    try {
+      await record.add({
+        'scientific_name': sciName,
+        'common_name': comName,
+        'conservation_status': consStat,
+        'species_id': specId,
+        'image': image,
+        'description': description,
+      });
+
+      return false; // Return a success message
+    } catch (e) {
+      return true; // Return an error message
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getAllSpeciesRecords() async {
+    List<Map<String, dynamic>> speciesRecords = [];
+
+    try {
+      final QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('species_record').get();
+
+      for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
+        speciesRecords.add(docSnapshot.data() as Map<String, dynamic>);
+      }
+
+      return speciesRecords;
+    } catch (e) {
+      print('Error fetching species records: $e');
+      return speciesRecords;
+    }
   }
 }
