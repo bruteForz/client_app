@@ -1,4 +1,5 @@
 import 'package:client_app/Constants/fontSizes.dart';
+import 'package:client_app/views/addSpeciesRecord.dart';
 import 'package:client_app/views/signUpScreen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:email_validator/email_validator.dart';
@@ -76,9 +77,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
     pwdValidator(String? val) {
       if (val!.length > 8)
         return null;
-      else
-          if(val!.length == 0) return 'Password is Empty!';
-        return 'Password is too short';
+      else if (val!.length == 0) return 'Password is Empty!';
+      return 'Password is too short';
     }
 
     return Scaffold(

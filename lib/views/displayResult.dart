@@ -1,4 +1,5 @@
 import 'package:client_app/Constants/fontSizes.dart';
+import 'package:client_app/views/addSpeciesRecord.dart';
 import 'package:client_app/views/loginScreen.dart';
 import 'package:client_app/views/networkError.dart';
 import 'package:client_app/views/oopsError.dart';
@@ -26,6 +27,9 @@ class DisplayResultScreenWidget extends StatefulWidget {
 }
 
 class _DisplayResultScreenWidgetState extends State<DisplayResultScreenWidget> {
+  final String scientificName = '';
+  final String commonName = '';
+
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
@@ -94,6 +98,12 @@ class _DisplayResultScreenWidgetState extends State<DisplayResultScreenWidget> {
                   ),
                   SizedBox(height: deviceSize.height * 0.05),
                   GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddSpeciesRec()));
+                    },
                     child: SizedBox(
                       child: Container(
                         width: double.infinity,

@@ -11,31 +11,22 @@ import '../Constants/elementColors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class FrogDetailScreen extends StatefulWidget {
-  const FrogDetailScreen({super.key});
+class FrogDetailScreen extends StatelessWidget {
+  FrogDetailScreen(
+      {super.key,
+      required this.commonName,
+      required this.sciName,
+      required this.consStatus,
+      required this.description});
 
-  @override
-  State<FrogDetailScreen> createState() => _FrogDetailScreenState();
-}
+  String commonName = '';
+  String sciName = '';
+  String consStatus = '';
+  String description = '';
 
-class _FrogDetailScreenState extends State<FrogDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    return FrogDetailScreenWidget();
-  }
-}
-
-class FrogDetailScreenWidget extends StatefulWidget {
-  const FrogDetailScreenWidget({super.key});
-
-  @override
-  State<FrogDetailScreenWidget> createState() => _FrogDetailScreenWidgetState();
-}
-
-class _FrogDetailScreenWidgetState extends State<FrogDetailScreenWidget> {
-  @override
-  Widget build(BuildContext context) {
-    var deviceSize = MediaQuery.of(context).size;
+    final deviceSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -44,12 +35,7 @@ class _FrogDetailScreenWidgetState extends State<FrogDetailScreenWidget> {
           foregroundColor: Colors.black,
           leading: IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ),
-              );
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_circle_left,
@@ -66,8 +52,8 @@ class _FrogDetailScreenWidgetState extends State<FrogDetailScreenWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    'common_name',
+                  Text(
+                    commonName,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: titleFontSize,
@@ -102,9 +88,10 @@ class _FrogDetailScreenWidgetState extends State<FrogDetailScreenWidget> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
-                    'Species_name',
-                    style: TextStyle(
+                  Text(
+                    sciName,
+                    style: const TextStyle(
+                      fontStyle: FontStyle.italic,
                       color: hintFontColor,
                       fontSize: hintTextFontSize,
                     ),
@@ -118,16 +105,16 @@ class _FrogDetailScreenWidgetState extends State<FrogDetailScreenWidget> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
-                    'EN',
+                  Text(
+                    consStatus,
                     style: TextStyle(
                       color: hintFontColor,
                       fontSize: hintTextFontSize,
                     ),
                   ),
                   SizedBox(height: deviceSize.height * 0.02),
-                  const Text(
-                    'Small Description abot frog species. Frogs in Sri Lanka are a diverse and fascinating group of amphibians that play a crucial role in the countrys ecosystem. Sri Lanka boasts a remarkable variety of frog species, with over 120 documented so far, many of which are endemic to the island. These frogs exhibit an array of colors, sizes, and adaptations, making them a subject of interest for both scientists and nature enthusiasts. ',
+                  Text(
+                    description,
                     style: TextStyle(
                       color: hintFontColor,
                       fontSize: hintTextFontSize,
