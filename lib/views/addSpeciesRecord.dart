@@ -24,9 +24,9 @@ class AddSpeciesRecWidget extends StatefulWidget {
 }
 
 class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
-  static final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
-  AddSpeciesRecord _addSpeciesRecord = AddSpeciesRecord();
+  final SpeciesRecordService _speciesRecordService = SpeciesRecordService();
 
   bool isImageSelected = false;
   final imageSelController = TextEditingController();
@@ -35,6 +35,7 @@ class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
   String sciName = '';
   String commonName = '';
   String imageLink = '';
+  String description = '';
 
   late String imageDownloadUrl;
 
@@ -54,13 +55,23 @@ class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
 
-    final sciNameController = TextEditingController();
-    final comNameController = TextEditingController();
-    final speciesIdController = TextEditingController();
-
     final ImageStorage _imageStorage = ImageStorage();
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_circle_left,
+            size: titleFontSize,
+          ),
+        ),
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -93,7 +104,6 @@ class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
                     },
                     validator: (val) =>
                         val!.isEmpty ? 'Field Cannot be Empty' : null,
-                    maxLength: 20,
                     decoration: const InputDecoration(
                       labelText: 'Scientific Name',
                       enabledBorder: UnderlineInputBorder(
@@ -112,10 +122,21 @@ class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
                       ),
                     ),
                   ),
+                  TextFormField(
+                    onChanged: (val) => setState(() {
+                      description = val;
+                    }),
+                    decoration: const InputDecoration(
+                      labelText: 'Description',
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                  ),
                   DropdownButton(
                     value: dropdownValue,
                     icon: const Icon(Icons.keyboard_arrow_down),
-                    hint: Text('Conservational Status'),
+                    hint: const Text('Conservational Status'),
                     items: consStatus.map((String items) {
                       return DropdownMenuItem(
                         value: items,
@@ -162,10 +183,9 @@ class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
                             _imageStorage
                                 .uploadFile(fileName, path)
                                 .then((value) => {
-                                      setState(() {
-                                        imageDownloadUrl = value;
-                                      }),
-                                      print('Image Uploaded '),
+                                      print(value),
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(imageUploadSuccess),
                                     });
                           },
                           icon: isImageSelected
@@ -176,12 +196,20 @@ class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
                   SizedBox(height: deviceSize.height * 0.05),
                   GestureDetector(
                     onTap: () async {
-                      await _addSpeciesRecord.addSpeciesRecord(
+                      dynamic addSpecies =
+                          await _speciesRecordService.addSpeciesRecord(
                         sciName,
                         commonName,
                         dropdownValue,
                         imageLink,
+                        description,
                       );
+                      if (addSpecies) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(speciesRecordAddFailed);
+                      }
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(speciesRecordAddSuccess);
                     },
                     child: Container(
                       width: double.infinity,

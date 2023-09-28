@@ -55,3 +55,27 @@ const fileSelectionFailed = SnackBar(
   behavior: SnackBarBehavior.floating,
   margin: EdgeInsets.all(5),
 );
+
+const imageUploadSuccess = SnackBar(
+  content: Text('Image Successfully Uploaded!'),
+  backgroundColor: Colors.green,
+  elevation: 10,
+  behavior: SnackBarBehavior.floating,
+  margin: EdgeInsets.all(5),
+);
+
+const speciesRecordAddFailed = SnackBar(
+  content: Text('Failed to Add Record!'),
+  backgroundColor: Colors.red,
+  elevation: 10,
+  behavior: SnackBarBehavior.floating,
+  margin: EdgeInsets.all(5),
+);
+
+const speciesRecordAddSuccess = SnackBar(
+  content: Text('Record Added Successfully!'),
+  backgroundColor: Colors.green,
+  elevation: 10,
+  behavior: SnackBarBehavior.floating,
+  margin: EdgeInsets.all(5),
+);

@@ -1,5 +1,7 @@
 import 'package:client_app/Models/firebaseUser.model.dart';
+import 'package:client_app/views/browseSpecies.dart';
 import 'package:client_app/views/homeScreen.dart';
+import 'package:client_app/views/readyToRecordScreen.dart';
 import 'package:client_app/views/signUpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +13,6 @@ import 'loginScreen.dart';
 
 class HelloHomeScreen extends StatelessWidget {
   const HelloHomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return HelloHomeScreenWidget();
@@ -42,11 +43,6 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
       return prefs.getString('userName');
     }
 
-    Future<String?> getUserEmail() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      return prefs.getString('userEmail');
-    }
-
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
@@ -57,7 +53,7 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
           leading: IconButton(
             onPressed: () {
               _auth.signOut();
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => HomeScreen(),
@@ -141,7 +137,7 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignUpScreen()));
+                              builder: (context) => BrowseSpeciesScreen()));
                     },
                     child: Image.asset(
                       'assets/images/browse-icon.png',
@@ -153,7 +149,7 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignUpScreen()));
+                              builder: (context) => BrowseSpeciesScreen()));
                     },
                     child: const Text(
                       'Browse Species',
