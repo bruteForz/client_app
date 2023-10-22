@@ -38,11 +38,8 @@ class _ReadyToRecordScreenWidgetState extends State<ReadyToRecordScreenWidget> {
           foregroundColor: Colors.black,
           leading: IconButton(
             onPressed: () {
-              Navigator.push(
+              Navigator.pop(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ),
               );
             },
             icon: const Icon(

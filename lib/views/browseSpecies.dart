@@ -85,7 +85,15 @@ class _BrowseSpeciesWidState extends State<BrowseSpeciesWid> {
       future: _speciesRecService.getAllSpeciesRecords(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Center(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+              child: CircularProgressIndicator(
+                color: btnColor,
+              ),
+            ),
+          );
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {

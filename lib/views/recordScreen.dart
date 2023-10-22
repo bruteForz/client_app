@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'dart:io';
 import 'package:client_app/views/addSpeciesRecord.dart';
+import 'package:client_app/views/filePreviewScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
@@ -40,6 +42,7 @@ class _RecordScreenWidgetState extends State<RecordScreenWidget> {
   void startRec() async {
     _recorder = FlutterSoundRecorder();
     filePath = '/sdcard/Download/temp.wav';
+
     await _recorder.openRecorder();
     await _recorder.setSubscriptionDuration(Duration(milliseconds: 10));
     await initializeDateFormatting();
@@ -58,6 +61,20 @@ class _RecordScreenWidgetState extends State<RecordScreenWidget> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_circle_left,
+            size: titleFontSize,
+          ),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
         child: Column(
@@ -88,11 +105,11 @@ class _RecordScreenWidgetState extends State<RecordScreenWidget> {
             ),
             isRecorded
                 ? GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AddSpeciesRec()));
+                              builder: (context) => PreviewRecord()));
                     },
                     child: Container(
                       width: double.infinity,
@@ -120,6 +137,10 @@ class _RecordScreenWidgetState extends State<RecordScreenWidget> {
   }
 
   Future<void> record() async {
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
     setState(() {
       isRecording = true;
     });

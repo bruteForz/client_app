@@ -242,11 +242,13 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                               MaterialPageRoute(
                                   builder: (context) => NetworkErrorScreen()));
                         } else {
-                          dynamic result = await _auth.registerUser(user);
-                          if (result == 'failed') {
+                          dynamic result = await _auth.register(user);
+                          if (result['success'] == false) {
+                            print(result);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(userCreationFailed);
                           } else {
+                            print(result);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(userCreationSuccess);
                             Navigator.push(

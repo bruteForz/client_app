@@ -1,5 +1,6 @@
 import 'package:client_app/Constants/fontSizes.dart';
 import 'package:client_app/views/addSpeciesRecord.dart';
+import 'package:client_app/views/homeScreen.dart';
 import 'package:client_app/views/signUpScreen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:email_validator/email_validator.dart';
@@ -139,12 +140,13 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   builder: (context) => NetworkErrorScreen()));
                         } else {
                           _loginFormKey.currentState!.validate();
-                          dynamic result =
-                              await _auth.signInUser(email, password);
-                          if (result == null) {
+                          dynamic result = await _auth.login(email, password);
+                          if (result['success'] == false) {
+                            print(result);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(signInFailed);
                           } else {
+                            print(result);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(signInSuccess);
                             Navigator.push(

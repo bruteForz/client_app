@@ -1,4 +1,8 @@
+import 'package:client_app/views/browseSpecies.dart';
+import 'package:client_app/views/displayResult.dart';
+import 'package:client_app/views/filePreviewScreen.dart';
 import 'package:client_app/views/homeScreen.dart';
+import 'package:client_app/views/recordScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

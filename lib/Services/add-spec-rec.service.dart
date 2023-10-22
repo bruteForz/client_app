@@ -38,26 +38,6 @@ class SpeciesRecordService {
     return uniqueId;
   }
 
-  // Future<String?> addSpeciesRecord(String sciName, String comName, String consStat,
-  //     String image, String description) async {
-  //   final CollectionReference record =
-  //       FirebaseFirestore.instance.collection('species_record');
-
-  //   String specId = getCustomUniqueId();
-
-  //   await record.add({
-  //     'scientific_name': sciName,
-  //     'common_name': comName,
-  //     'conservation_status': consStat,
-  //     'species_id': specId,
-  //     'image': image,
-  //     'description': description,
-  //   }).then((value) => {
-
-  //       });
-  //   return null;
-  // }
-
   Future<bool?> addSpeciesRecord(String sciName, String comName,
       String consStat, String image, String description) async {
     final CollectionReference record =
@@ -75,9 +55,9 @@ class SpeciesRecordService {
         'description': description,
       });
 
-      return false; // Return a success message
+      return false;
     } catch (e) {
-      return true; // Return an error message
+      return true;
     }
   }
 
@@ -96,6 +76,42 @@ class SpeciesRecordService {
     } catch (e) {
       print('Error fetching species records: $e');
       return speciesRecords;
+    }
+  }
+
+  Future<Species?> getSingleSpeciesRecordByAttribute(
+      dynamic speciesName) async {
+    Species speciesRecord = Species(
+      speciesId: '',
+      image: '',
+      conservationStatus: '',
+      description: '',
+      scientificName: '',
+      commonName: '',
+    );
+    var data;
+
+    try {
+      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('species_record')
+          .where('common_name', isEqualTo: speciesName)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final docSnapshot = querySnapshot.docs.first;
+        data = docSnapshot.data();
+        speciesRecord.speciesId = data['species_id'];
+        speciesRecord.image = data['image'];
+        speciesRecord.conservationStatus = data['conservation_status'];
+        speciesRecord.description = data['description'];
+        speciesRecord.scientificName = data['scientific_name'];
+        speciesRecord.commonName = data['common_name'];
+      }
+      return speciesRecord;
+    } catch (e) {
+      print('Error fetching species record: $e');
+      return null;
     }
   }
 }

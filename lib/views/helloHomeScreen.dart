@@ -52,7 +52,7 @@ class _HelloHomeScreenWidgetState extends State<HelloHomeScreenWidget> {
           foregroundColor: Colors.black,
           leading: IconButton(
             onPressed: () {
-              _auth.signOut();
+              // _auth.signOut();
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
