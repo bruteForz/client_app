@@ -37,7 +37,7 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
     password: '',
   );
 
-  late ConnectivityResult _connectionStatus;
+  late ConnectivityResult _signUpConnectionStatus;
 
   @override
   void initState() {
@@ -45,14 +45,14 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
     // Subscribe to connectivity changes
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       setState(() {
-        _connectionStatus = result;
+        _signUpConnectionStatus = result;
       });
     });
 
     // Check the initial connectivity state
     Connectivity().checkConnectivity().then((ConnectivityResult result) {
       setState(() {
-        _connectionStatus = result;
+        _signUpConnectionStatus = result;
       });
     });
   }
@@ -236,7 +236,8 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                           user.password = password;
                         });
 
-                        if (_connectionStatus == ConnectivityResult.none) {
+                        if (_signUpConnectionStatus ==
+                            ConnectivityResult.none) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(

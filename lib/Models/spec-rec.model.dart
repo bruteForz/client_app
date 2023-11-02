@@ -18,18 +18,22 @@ class SpeciesRecord {
 
 class Species {
   String speciesId;
-  String image;
   String conservationStatus;
   String description;
   String scientificName;
   String commonName;
+  String altitude;
+  String latitude;
+  String longitude;
 
   Species({
     required this.speciesId,
-    required this.image,
     required this.conservationStatus,
     required this.description,
     required this.scientificName,
     required this.commonName,
+    required this.altitude,
+    required this.latitude,
+    required this.longitude,
   });
 }

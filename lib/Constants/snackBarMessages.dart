@@ -79,3 +79,19 @@ const speciesRecordAddSuccess = SnackBar(
   behavior: SnackBarBehavior.floating,
   margin: EdgeInsets.all(5),
 );
+
+const addLocationSuccess = SnackBar(
+  content: Text('Location added successfully!'),
+  backgroundColor: Colors.green,
+  elevation: 10,
+  behavior: SnackBarBehavior.floating,
+  margin: EdgeInsets.all(5),
+);
+
+const addLocationFailed = SnackBar(
+  content: Text('Location adding failed!'),
+  backgroundColor: Colors.red,
+  elevation: 10,
+  behavior: SnackBarBehavior.floating,
+  margin: EdgeInsets.all(5),
+);

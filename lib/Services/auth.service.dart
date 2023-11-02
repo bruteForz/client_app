@@ -85,7 +85,9 @@ import '../Models/firebaseUser.model.dart';
 // sql database
 
 class AuthService {
-  static const baseUrl = 'http://192.168.8.194:5000';
+  // static const baseUrl = 'http://10.0.2.2:5000';
+
+  static const baseUrl = 'http://192.168.137.1:3000';
 
   Future<Map<String, dynamic>> login(String email, String password) async {
     final Uri loginUri = Uri.parse('$baseUrl/login');
@@ -106,15 +108,18 @@ class AuthService {
         body: jsonEncode(credentials),
       );
 
+      print(response.body);
+
       if (response.statusCode == 201) {
         final responseData = jsonDecode(response.body);
-        print(responseData['user']['username']);
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('userId', responseData['user']['user_ID']);
         prefs.setString('userName', responseData['user']['username']);
         prefs.setString('userEmail', responseData['user']['email']);
         prefs.setString('authToken', responseData['authToken']);
         prefs.setString('userType', responseData['usertype']);
+
         return {
           'success': true,
           'message': responseData,
@@ -135,7 +140,7 @@ class AuthService {
   }
 
   Future<Map<String, dynamic>> register(ClientUser user) async {
-    final Uri loginUri = Uri.parse('$baseUrl/login');
+    final Uri loginUri = Uri.parse('$baseUrl/register');
 
     final Map<String, String> credentials = {
       'username': user.userName,

@@ -1,7 +1,10 @@
 import 'package:client_app/Constants/fontSizes.dart';
 import 'package:client_app/Models/spec-rec.model.dart';
 import 'package:client_app/Services/add-spec-rec.service.dart';
+import 'package:client_app/Services/species.service.dart';
 import 'package:client_app/views/addSpeciesRecord.dart';
+import 'package:client_app/views/adminHomeScreen.dart';
+import 'package:client_app/views/homeScreen.dart';
 import 'package:client_app/views/loginScreen.dart';
 import 'package:client_app/views/networkError.dart';
 import 'package:client_app/views/oopsError.dart';
@@ -9,6 +12,7 @@ import 'package:client_app/views/recordScreen.dart';
 import 'package:client_app/views/signUpScreen.dart';
 import 'package:client_app/views/helloHomeScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Constants/elementColors.dart';
 
 class DisplayResultScreen extends StatelessWidget {
@@ -38,6 +42,7 @@ class _DisplayResultScreenWidgetState extends State<DisplayResultScreenWidget> {
   final String scientificName = '';
   String commonName = '';
   final SpeciesRecordService _speciesRecService = SpeciesRecordService();
+  final SpeciesService _speciesService = SpeciesService();
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +52,12 @@ class _DisplayResultScreenWidgetState extends State<DisplayResultScreenWidget> {
       commonName = 'Common Shrub Frog';
     } else if (widget.result['class'] == 2) {
       commonName = 'Ceylon Streamlined Frog';
+    } else if (widget.result['class'] == 3) {
+      commonName = 'Rohan\'s Globular Frog';
     }
     var deviceSize = MediaQuery.of(context).size;
     return FutureBuilder(
-      future: _speciesRecService.getSingleSpeciesRecordByAttribute(commonName),
+      future: _speciesService.browseSpecies(commonName),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
@@ -69,7 +76,10 @@ class _DisplayResultScreenWidgetState extends State<DisplayResultScreenWidget> {
             ),
           );
         } else {
-          Species? speciesData = snapshot.data;
+          dynamic speciesData = snapshot.data;
+          print(widget.result['class']);
+
+          print(speciesData);
 
           return Scaffold(
             appBar: AppBar(
@@ -106,13 +116,13 @@ class _DisplayResultScreenWidgetState extends State<DisplayResultScreenWidget> {
                       SizedBox(height: deviceSize.height * 0.05),
                       GestureDetector(
                         child: Image.asset(
-                          'assets/images/displayresult.png',
+                          'assets/images/frogs/${commonName}.jpg',
                           scale: 4.5,
                         ),
                       ),
                       SizedBox(height: deviceSize.height * 0.05),
                       Text(
-                        speciesData!.commonName,
+                        speciesData['recs'][0]['common_name'],
                         style: TextStyle(
                           color: mainFontColor,
                           fontSize: textBtnFontSize,
@@ -121,7 +131,7 @@ class _DisplayResultScreenWidgetState extends State<DisplayResultScreenWidget> {
                       ),
                       SizedBox(height: deviceSize.height * 0.01),
                       Text(
-                        speciesData!.scientificName,
+                        speciesData['recs'][0]['scientific_name'],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: hintFontColor,
@@ -130,19 +140,28 @@ class _DisplayResultScreenWidgetState extends State<DisplayResultScreenWidget> {
                       ),
                       SizedBox(height: deviceSize.height * 0.05),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AddSpeciesRec(
-                                species: speciesData,
+                        onTap: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          var userType = prefs.getString('userType');
+                          if (userType == 'admin')
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AdminHomeScreen(),
                               ),
-                            ),
-                          );
+                            );
+                          else if (userType == 'user')
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HelloHomeScreen(),
+                              ),
+                            );
                         },
                         child: SizedBox(
                           child: Container(
-                            width: double.infinity,
+                            width: deviceSize.width * 0.6,
                             height: deviceSize.height * 0.07,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50.0),
@@ -150,7 +169,7 @@ class _DisplayResultScreenWidgetState extends State<DisplayResultScreenWidget> {
                             ),
                             child: const Center(
                                 child: Text(
-                              "Submit Species Record",
+                              "Return Home",
                               style: TextStyle(
                                   color: backgroundColor,
                                   fontSize: btnTextFontSize),

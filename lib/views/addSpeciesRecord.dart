@@ -1,6 +1,7 @@
 import 'package:client_app/Models/spec-rec.model.dart';
 import 'package:client_app/Services/add-spec-rec.service.dart';
 import 'package:client_app/Services/firebase-storage.service.dart';
+import 'package:client_app/Services/species.service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -11,22 +12,16 @@ import '../Constants/fontSizes.dart';
 import '../Constants/snackBarMessages.dart';
 
 class AddSpeciesRec extends StatelessWidget {
-  const AddSpeciesRec({super.key, required this.species});
-
-  final Species species;
+  const AddSpeciesRec({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AddSpeciesRecWidget(
-      species: species,
-    );
+    return AddSpeciesRecWidget();
   }
 }
 
 class AddSpeciesRecWidget extends StatefulWidget {
-  const AddSpeciesRecWidget({super.key, required this.species});
-
-  final Species species;
+  const AddSpeciesRecWidget({super.key});
 
   @override
   State<AddSpeciesRecWidget> createState() => _AddSpeciesRecWidgetState();
@@ -35,11 +30,15 @@ class AddSpeciesRecWidget extends StatefulWidget {
 class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
   final _formKey = GlobalKey<FormState>();
 
-  final SpeciesRecordService _speciesRecordService = SpeciesRecordService();
+  final SpeciesService _speciesService = SpeciesService();
 
   bool isImageSelected = false;
   final imageSelController = TextEditingController();
   dynamic pickedImage;
+
+  double longitude = 0.0;
+  double latitude = 0.0;
+  double altitude = 0.0;
 
   String sciName = '';
   String commonName = '';
@@ -66,12 +65,6 @@ class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
     final deviceSize = MediaQuery.of(context).size;
 
     final ImageStorage _imageStorage = ImageStorage();
-
-    sciName = widget.species.scientificName;
-    commonName = widget.species.commonName;
-    imageLink = widget.species.image;
-    description = widget.species.description;
-    dropdownValue = widget.species.conservationStatus;
 
     return Scaffold(
       appBar: AppBar(
@@ -224,16 +217,18 @@ class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
                       if (status.isGranted) {
                         Position position = await getLocation();
                         if (position != null) {
-                          double latitude = position.latitude;
-                          double longitude = position.longitude;
-                          position;
                           setState(() {
-                            buttonText =
-                                'Latitude: $latitude, Longitude: $longitude';
+                            latitude = position.latitude;
+                            longitude = position.longitude;
+                            altitude = position.altitude;
                           });
-                          print("Latitude: $latitude, Longitude: $longitude");
+
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(addLocationSuccess);
                         } else {
                           print('location update error');
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(addLocationFailed);
                         }
                       }
                     },
@@ -262,20 +257,25 @@ class _AddSpeciesRecWidgetState extends State<AddSpeciesRecWidget> {
                   SizedBox(height: deviceSize.height * 0.05),
                   GestureDetector(
                     onTap: () async {
-                      dynamic addSpecies =
-                          await _speciesRecordService.addSpeciesRecord(
-                        sciName,
-                        commonName,
-                        dropdownValue,
-                        imageLink,
-                        description,
-                      );
-                      if (addSpecies) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(speciesRecordAddFailed);
-                      }
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(speciesRecordAddSuccess);
+                      // dynamic addSpecies =
+                      //     await _speciesRecordService.addSpeciesRecord(
+                      //   sciName,
+                      //   commonName,
+                      //   dropdownValue,
+                      //   imageLink,
+                      //   description,
+                      // );
+
+                      await _speciesService
+                          .addSpecies(commonName, sciName, dropdownValue,
+                              latitude, longitude, altitude, description)
+                          .then((res) => {print(res)});
+                      // if (addSpecies) {
+                      //   ScaffoldMessenger.of(context)
+                      //       .showSnackBar(speciesRecordAddFailed);
+                      // }
+                      // ScaffoldMessenger.of(context)
+                      //     .showSnackBar(speciesRecordAddSuccess);
                     },
                     child: Container(
                       width: double.infinity,

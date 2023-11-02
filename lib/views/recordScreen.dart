@@ -39,6 +39,47 @@ class _RecordScreenWidgetState extends State<RecordScreenWidget> {
   bool isRecorded = false;
   String _recorderTxt = '00:00';
 
+  Stream<int>? timerStream;
+  StreamSubscription<int>? timerSubscription;
+  String minutesStr = '00';
+  String secondsStr = '00';
+
+// Handle timeStream
+
+  Stream<int> stopWatchStream() {
+    StreamController<int>? streamController;
+    Timer? timer;
+    Duration timerInterval = Duration(seconds: 1);
+    int counter = 0;
+
+    void stopTimer() {
+      if (timer != null) {
+        timer!.cancel();
+        timer = null;
+        counter = 0;
+        streamController!.close();
+      }
+    }
+
+    void tick(_) {
+      counter++;
+      streamController!.add(counter);
+    }
+
+    void startTimer() {
+      timer = Timer.periodic(timerInterval, tick);
+    }
+
+    streamController = StreamController<int>(
+      onListen: startTimer,
+      onCancel: stopTimer,
+      onResume: startTimer,
+      onPause: stopTimer,
+    );
+
+    return streamController.stream;
+  }
+
   void startRec() async {
     _recorder = FlutterSoundRecorder();
     filePath = '/sdcard/Download/temp.wav';
@@ -49,6 +90,14 @@ class _RecordScreenWidgetState extends State<RecordScreenWidget> {
     await Permission.microphone.request();
     await Permission.storage.request();
     await Permission.manageExternalStorage.request();
+
+    timerStream = stopWatchStream();
+    timerSubscription = timerStream!.listen((int newTick) {
+      setState(() {
+        minutesStr = ((newTick / 60) % 60).floor().toString().padLeft(2, '0');
+        secondsStr = (newTick % 60).floor().toString().padLeft(2, '0');
+      });
+    });
   }
 
   @override
@@ -97,7 +146,7 @@ class _RecordScreenWidgetState extends State<RecordScreenWidget> {
               ),
             ),
             Text(
-              _recorderTxt,
+              '$minutesStr:$secondsStr',
               style: TextStyle(
                 fontSize: titleFontSize,
                 fontWeight: FontWeight.bold,
@@ -171,6 +220,14 @@ class _RecordScreenWidgetState extends State<RecordScreenWidget> {
       isRecording = false;
       isRecorded = true;
     });
+
+    timerSubscription!.cancel();
+    timerStream = null;
+    setState(() {
+      minutesStr = '00';
+      secondsStr = '00';
+    });
+
     return await _recorder.stopRecorder();
   }
 

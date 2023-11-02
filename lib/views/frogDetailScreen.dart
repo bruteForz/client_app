@@ -61,24 +61,132 @@ class FrogDetailScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: deviceSize.height * 0.04),
-                  Container(
-                      //                 Widget content() {
-                      // return Container(
+                  Visibility(
+                    visible: commonName == 'Common Shrub Frog',
+                    child: Container(
                       child: CarouselSlider(
-                          items: [
-                        Image.asset('assets/images/IMG1.jpeg'),
-                        Image.asset('assets/images/IMG2.jpg'),
-                        Image.asset('assets/images/IMG3.jpeg'),
-                      ],
-                          options: CarouselOptions(
-                            height: deviceSize.height * 0.25,
-                            enlargeCenterPage: true,
-                            autoPlay: true,
-                            aspectRatio: 16 / 9,
-                            viewportFraction: 0.8,
-                            scrollDirection: Axis.horizontal,
-                            enableInfiniteScroll: true,
-                          ))),
+                        items: [
+                          Image.asset('assets/images/shrub/1.jpeg'),
+                          Image.asset('assets/images/shrub/2.jpeg'),
+                          Image.asset('assets/images/shrub/3.jpg'),
+                        ],
+                        options: CarouselOptions(
+                          height: deviceSize.height * 0.25,
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          scrollDirection: Axis.horizontal,
+                          enableInfiniteScroll: true,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: commonName == 'Asian Common Toad',
+                    child: Container(
+                      child: CarouselSlider(
+                        items: [
+                          Image.asset('assets/images/common/1.jpeg'),
+                          Image.asset('assets/images/common/2.jpeg'),
+                          Image.asset('assets/images/common/3.jpeg'),
+                        ],
+                        options: CarouselOptions(
+                          height: deviceSize.height * 0.25,
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          scrollDirection: Axis.horizontal,
+                          enableInfiniteScroll: true,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: commonName == 'Common Indian Cricket Frog',
+                    child: Container(
+                      child: CarouselSlider(
+                        items: [
+                          Image.asset('assets/images/cricket/1.jpg'),
+                          Image.asset('assets/images/cricket/2.jpg'),
+                          Image.asset('assets/images/cricket/3.jpg'),
+                        ],
+                        options: CarouselOptions(
+                          height: deviceSize.height * 0.25,
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          scrollDirection: Axis.horizontal,
+                          enableInfiniteScroll: true,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: commonName == 'Indian Skipper Frog',
+                    child: Container(
+                      child: CarouselSlider(
+                        items: [
+                          Image.asset('assets/images/skipper/1.jpeg'),
+                          Image.asset('assets/images/skipper/2.jpg'),
+                          Image.asset('assets/images/skipper/3.jpg'),
+                        ],
+                        options: CarouselOptions(
+                          height: deviceSize.height * 0.25,
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          scrollDirection: Axis.horizontal,
+                          enableInfiniteScroll: true,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: commonName == 'Ceylon Streamlined Frog',
+                    child: Container(
+                      child: CarouselSlider(
+                        items: [
+                          Image.asset('assets/images/streamedline/1.jpeg'),
+                          Image.asset('assets/images/streamedline/2.jpeg'),
+                          Image.asset('assets/images/streamedline/3.jpeg'),
+                        ],
+                        options: CarouselOptions(
+                          height: deviceSize.height * 0.25,
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          scrollDirection: Axis.horizontal,
+                          enableInfiniteScroll: true,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: commonName == 'Rohan\'s Globular Frog',
+                    child: Container(
+                      child: CarouselSlider(
+                        items: [
+                          Image.asset('assets/images/globular/1.jpeg'),
+                          Image.asset('assets/images/globular/2.jpeg'),
+                          Image.asset('assets/images/globular/3.jpeg'),
+                        ],
+                        options: CarouselOptions(
+                          height: deviceSize.height * 0.25,
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          scrollDirection: Axis.horizontal,
+                          enableInfiniteScroll: true,
+                        ),
+                      ),
+                    ),
+                  ),
                   SizedBox(height: deviceSize.height * 0.02),
                   const Text(
                     'Species Name',

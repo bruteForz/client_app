@@ -1,5 +1,6 @@
 import 'package:client_app/Constants/fontSizes.dart';
 import 'package:client_app/views/addSpeciesRecord.dart';
+import 'package:client_app/views/adminHomeScreen.dart';
 import 'package:client_app/views/homeScreen.dart';
 import 'package:client_app/views/signUpScreen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -146,13 +147,21 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(signInFailed);
                           } else {
-                            print(result);
+                            print(result['message']);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(signInSuccess);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HelloHomeScreen()));
+                            if (result['message']['usertype'] == 'admin') {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AdminHomeScreen()));
+                            } else if (result['message']['usertype'] ==
+                                'user') {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HelloHomeScreen()));
+                            }
                           }
                         }
                       }

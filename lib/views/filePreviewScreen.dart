@@ -110,7 +110,7 @@ class _PreviewRecordWidgetState extends State<PreviewRecordWidget> {
   Future uploadAudioFile() async {
     print('method called');
     final url = Uri.parse(
-        'http://192.168.43.145:5000/classify-audio'); // Replace with your API endpoint
+        'http://192.168.137.1:5000/classify-audio'); // Replace with your API endpoint
 
     var request = http.MultipartRequest('POST', url);
     request.files.add(await http.MultipartFile.fromPath(

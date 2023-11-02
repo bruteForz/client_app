@@ -79,39 +79,39 @@ class SpeciesRecordService {
     }
   }
 
-  Future<Species?> getSingleSpeciesRecordByAttribute(
-      dynamic speciesName) async {
-    Species speciesRecord = Species(
-      speciesId: '',
-      image: '',
-      conservationStatus: '',
-      description: '',
-      scientificName: '',
-      commonName: '',
-    );
-    var data;
+  // Future<Species?> getSingleSpeciesRecordByAttribute(
+  //     dynamic speciesName) async {
+  //   Species speciesRecord = Species(
+  //     speciesId: '',
+  //     image: '',
+  //     conservationStatus: '',
+  //     description: '',
+  //     scientificName: '',
+  //     commonName: '',
+  //   );
+  //   var data;
 
-    try {
-      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('species_record')
-          .where('common_name', isEqualTo: speciesName)
-          .limit(1)
-          .get();
+  //   try {
+  //     final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+  //         .collection('species_record')
+  //         .where('common_name', isEqualTo: speciesName)
+  //         .limit(1)
+  //         .get();
 
-      if (querySnapshot.docs.isNotEmpty) {
-        final docSnapshot = querySnapshot.docs.first;
-        data = docSnapshot.data();
-        speciesRecord.speciesId = data['species_id'];
-        speciesRecord.image = data['image'];
-        speciesRecord.conservationStatus = data['conservation_status'];
-        speciesRecord.description = data['description'];
-        speciesRecord.scientificName = data['scientific_name'];
-        speciesRecord.commonName = data['common_name'];
-      }
-      return speciesRecord;
-    } catch (e) {
-      print('Error fetching species record: $e');
-      return null;
-    }
-  }
+  //     if (querySnapshot.docs.isNotEmpty) {
+  //       final docSnapshot = querySnapshot.docs.first;
+  //       data = docSnapshot.data();
+  //       speciesRecord.speciesId = data['species_id'];
+  //       speciesRecord.image = data['image'];
+  //       speciesRecord.conservationStatus = data['conservation_status'];
+  //       speciesRecord.description = data['description'];
+  //       speciesRecord.scientificName = data['scientific_name'];
+  //       speciesRecord.commonName = data['common_name'];
+  //     }
+  //     return speciesRecord;
+  //   } catch (e) {
+  //     print('Error fetching species record: $e');
+  //     return null;
+  //   }
+  // }
 }

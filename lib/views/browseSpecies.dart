@@ -100,6 +100,7 @@ class _BrowseSpeciesWidState extends State<BrowseSpeciesWid> {
           final speciesRecords = snapshot.data;
           return ListView.builder(
             scrollDirection: Axis.vertical,
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: speciesRecords?.length,
             itemBuilder: (context, index) {
